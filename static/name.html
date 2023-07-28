@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+window.onload = async function () {
+  const response = await fetch('http://127.0.0.1:5000/stats/eny');
+  const names = await response.json();
+  console.log(names);
+
+  let data = []
+  for (const [ name, values ] of Object.entries(names)) {
+    const datapoints = values.map(value => Object.create({ y: value[1], x: value[0]}))
+
+    data.push(
+      {
+        type: "line",
+        name: name,
+        indexLabelFontSize: 16,
+        showInLegend: true,
+        xValueType: "integer",
+        dataPoints: datapoints,
+      }
+    )
+  }
+  console.log(data)
+  var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    theme: "light2",
+    title: {
+      text: "Historical name stats"
+    },
+    axisX:{
+        interval: 1,
+         valueFormatString: "####",
+     },
+    data: data
+  });
+  chart.render();
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+</body>
+</html>
