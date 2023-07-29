@@ -3,7 +3,9 @@
 <head>
 <script>
 window.onload = async function () {
-  const response = await fetch('http://127.0.0.1:5000/stats/eny');
+  const api_url = "{{ config.API_URL }}"
+
+  const response = await fetch(api_url)
   const names = await response.json();
   console.log(names);
 
