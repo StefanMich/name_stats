@@ -3,9 +3,7 @@
 <head>
 <script>
 window.onload = async function () {
-  const api_url = "{{ config.API_URL }}"
-
-  const response = await fetch(api_url)
+  const response = await fetch('/stats/eny')
   const names = await response.json();
   console.log(names);
 

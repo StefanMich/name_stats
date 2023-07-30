@@ -13,9 +13,7 @@ app = Flask(__name__)
 app.config.from_prefixed_env()
 print(app.config.get('ENV'))
 if app.config.get('ENV') == 'production':
-    app.config['API_URL'] = 'https://name-stats.onrender.com/stats/eny'
-else:
-    app.config['API_URL'] = 'http://127.0.0.1:8000/stats/eny'
+    pass
 CORS(app)
 
 
