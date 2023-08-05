@@ -6,6 +6,8 @@ import sqlite3
 import requests as requests
 from bs4 import BeautifulSoup
 
+from api import app
+
 url = 'https://www.dst.dk/da/Statistik/emner/borgere/navne/HvorMange?ajax=1'
 
 name_count = requests.get(url, params={'firstName': 'eny',}, headers={'Accept': 'application/json'})
@@ -21,7 +23,7 @@ name_text = soup.div.div.table.find_all('tr')[1].find_all('td')[0]
 name = re.search(r'.*\'(\S+)\'', name_text.text).group(1)
 
 
-with sqlite3.connect('names.db') as con:
+with sqlite3.connect(app.config['DB']) as con:
     con.execute('CREATE TABLE IF NOT EXISTS names (name TEXT, count INTEGER, year INTEGER, creation_date DATETIME DEFAULT CURRENT_TIMESTAMP)')
     con.execute('INSERT INTO names (name, count, year) VALUES (?, ?, ?)', (name, count.text, year.text))
 

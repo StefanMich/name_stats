@@ -10,16 +10,15 @@ from flask_cors import CORS
 import sqlite3
 
 app = Flask(__name__)
-app.config.from_prefixed_env()
-print(app.config.get('ENV'))
-if app.config.get('ENV') == 'production':
-    pass
+
+app.config.from_object('default_settings')
+
 CORS(app)
 
 
 @app.route('/stats/<name>')
 def get_name(name):
-    with sqlite3.connect('names.db') as con:
+    with sqlite3.connect(app.config['DB']) as con:
         cursor = con.execute('SELECT DISTINCT name, count, year FROM names WHERE name = ? COLLATE NOCASE', (name,))
         rows = cursor.fetchall()
 
