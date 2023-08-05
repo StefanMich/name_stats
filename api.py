@@ -29,6 +29,6 @@ def get_name(name):
         return jsonify(name_stats)
 
 
-@app.route('/app')
+@app.route('/')
 def get_app():
     return render_template('name.html')
