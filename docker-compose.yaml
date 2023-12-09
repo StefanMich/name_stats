@@ -1,0 +1,15 @@
+version: "2.4"
+services:
+  name-stats:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    container_name: name-stats
+    stop_signal: SIGINT
+    ports:
+      - "8000:8000"
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+
+    volumes:
+      - .:/app

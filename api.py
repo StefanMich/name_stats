@@ -31,3 +31,7 @@ def get_name(name):
 @app.route('/')
 def get_app():
     return render_template('name.html')
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000)
