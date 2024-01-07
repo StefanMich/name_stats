@@ -3,11 +3,14 @@ from collections import defaultdict
 
 from flask import (
     jsonify,
+    redirect,
+    request,
     render_template,
 )
 import sqlite3
 
 from app import app
+from load_stats import store_all_stats
 
 
 @app.route('/stats/')
@@ -35,9 +38,17 @@ def get_name(name):
 
 
 @app.route('/')
-def get_app():
+def graph_view():
     return render_template('name.html')
 
 
+@app.route('/load_stats/', methods=['GET', 'POST'])
+def load_stats():
+    if request.method == 'POST':
+        store_all_stats()
+        return redirect('/')
+    return render_template('load_stats.html')
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=8000, debug=True)
