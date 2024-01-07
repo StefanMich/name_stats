@@ -9,8 +9,7 @@ window.onload = async function () {
 
   let data = []
   for (const [ name, values ] of Object.entries(names)) {
-    const datapoints = values.map(value => Object.create({ y: value[1], x: value[0]}))
-
+    const datapoints = values.map(value => ({ y: value[1], x: value[0]}))
     data.push(
       {
         type: "line",
