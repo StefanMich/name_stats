@@ -2,18 +2,12 @@
 from collections import defaultdict
 
 from flask import (
-    Flask,
     jsonify,
     render_template,
 )
-from flask_cors import CORS
 import sqlite3
 
-app = Flask(__name__)
-
-app.config.from_object('default_settings')
-
-CORS(app)
+from app import app
 
 
 @app.route('/stats/')

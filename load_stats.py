@@ -7,7 +7,7 @@ from typing import Iterable
 import requests as requests
 from bs4 import BeautifulSoup
 
-from api import app
+from app import app
 
 url = 'https://www.dst.dk/da/Statistik/emner/borgere/navne/HvorMange?ajax=1'
 
