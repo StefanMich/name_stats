@@ -16,6 +16,18 @@ app.config.from_object('default_settings')
 CORS(app)
 
 
+@app.route('/stats/')
+def get_all_stats():
+    with sqlite3.connect(app.config['DB']) as con:
+        cursor = con.execute('SELECT name, count, year FROM names')
+        rows = cursor.fetchall()
+
+        name_stats = defaultdict(list)
+        for name, count, year in rows:
+            name_stats[name].append((year, count))
+        return jsonify(name_stats)
+
+
 @app.route('/stats/<name>')
 def get_name(name):
     with sqlite3.connect(app.config['DB']) as con:

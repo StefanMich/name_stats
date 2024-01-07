@@ -3,7 +3,7 @@
 <head>
 <script>
 window.onload = async function () {
-  const response = await fetch('/stats/eny')
+  const response = await fetch('/stats/')
   const names = await response.json();
   console.log(names);
 
@@ -29,13 +29,30 @@ window.onload = async function () {
     title: {
       text: "Historical name stats"
     },
+    legend:{
+      cursor: "pointer",
+      verticalAlign: "center",
+      horizontalAlign: "right",
+      itemclick: toogleDataSeries
+    },
     axisX:{
         interval: 1,
          valueFormatString: "####",
      },
     data: data
   });
-  chart.render();
+chart.render();
+
+function toogleDataSeries(e){
+    console.log('here')
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	} else{
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
 }
 </script>
 </head>
