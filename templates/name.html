@@ -16,8 +16,10 @@ window.onload = async function () {
         name: name,
         indexLabelFontSize: 16,
         showInLegend: true,
-        xValueType: "integer",
+        xValueType: "number",
+        xValueFormatString: "####",
         dataPoints: datapoints,
+        toolTipContent: "{name} - {x}: {y}"
       }
     )
   }
@@ -36,7 +38,7 @@ window.onload = async function () {
     },
     axisX:{
         interval: 1,
-         valueFormatString: "####",
+        valueFormatString: "####",
      },
     data: data
   });
