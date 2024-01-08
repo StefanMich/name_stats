@@ -57,6 +57,7 @@ names = ['eny', 'stefan', 'katrine', 'alexander', 'peter', 'birthe', 'poul', 'ti
 
 
 def store_all_stats() -> None:
+    ensure_db()
     for name in names:
         for stat in fetch_stats(name):
             name, count, year = stat
@@ -64,6 +65,5 @@ def store_all_stats() -> None:
 
 
 if __name__ == '__main__':
-    ensure_db()
     store_all_stats()
     print(get_all_stats())
