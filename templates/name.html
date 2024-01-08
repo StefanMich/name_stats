@@ -54,11 +54,30 @@ function toogleDataSeries(e){
 	chart.render();
 }
 
+document.getElementById("only_eny").addEventListener("click",function(){
+  chart.options.data.forEach(function(dataSeries){
+    if(dataSeries.name != 'ENY') {
+      dataSeries.visible = false
+    }
+  })
+    chart.render()
+});
+
+document.getElementById("all").addEventListener("click",function(){
+  chart.options.data.forEach(function(dataSeries){
+    dataSeries.visible = true
+  })
+    chart.render()
+});
+
 }
 </script>
 </head>
 <body>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<input type="button" onclick="window.open('load_stats')" value="Load Stats"/>
+<button id="only_eny">Only Eny</button>
+<button id="all">All</button>
 </body>
 </html>
