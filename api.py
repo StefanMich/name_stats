@@ -1,4 +1,3 @@
-# create flask api that fetches all entries with a given name from the database and returns as json
 from collections import defaultdict
 
 from flask import (
