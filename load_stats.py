@@ -53,7 +53,7 @@ def get_all_stats() -> Iterable[tuple[str, int, int]]:
         return con.execute('SELECT name, count, year FROM names').fetchall()
 
 
-names = ['eny', 'stefan', 'katrine', 'alexander', 'peter', 'birthe', 'poul', 'tina', 'maja']
+names = ['eny', 'stefan', 'katrine', 'alexander', 'peter', 'birthe', 'poul', 'tina', 'maja', 'christian']
 
 
 def store_all_stats() -> None:
