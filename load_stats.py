@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 from app import app
 
-url = 'https://www.dst.dk/da/Statistik/emner/borgere/navne/HvorMange?ajax=1'
+url = 'https://www.dst.dk/da/DstDk-Global/Udvikler/HostHvorMangeHedder?ajax=1'
 
 
 def fetch_stats(name: str) -> Iterable[tuple[str, int, int]]:
@@ -23,16 +23,18 @@ def fetch_stats(name: str) -> Iterable[tuple[str, int, int]]:
     header = rows[0]
     name_rows = len(rows) - 1
 
-    for column in [1, 2]:
-        year_cell = header.find_all('th')[column]
-        year = int(year_cell.text.replace('.', ''))
 
-        total_count = 0
+    year_cell = header.find_all('th')[1]
+    year = int(year_cell.text.replace('.', ''))
 
-        for name_row in range(1, name_rows + 1):
-            count_cell = rows[name_row].find_all('td')[column]
-            count = int(count_cell.text.replace('.', ''))
-            total_count += count
+    total_count = 0
+
+    for name_row in range(1, name_rows + 1):
+        count_cell = rows[name_row].find_all('td')[1]
+        if count_cell.text == '':
+            continue
+        count = int(count_cell.text.replace('.', ''))
+        total_count += count
 
         yield name, total_count, year
 
