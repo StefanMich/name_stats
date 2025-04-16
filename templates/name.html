@@ -2,26 +2,24 @@
 <html>
 <head>
 <script>
-window.onload = async function () {
+window.onload = async function() {
   const response = await fetch('/stats/')
   const names = await response.json();
   console.log(names);
 
   let data = []
-  for (const [ name, values ] of Object.entries(names)) {
-    const datapoints = values.map(value => ({ y: value[1], x: value[0]}))
-    data.push(
-      {
-        type: "line",
-        name: name,
-        indexLabelFontSize: 16,
-        showInLegend: true,
-        xValueType: "number",
-        xValueFormatString: "####",
-        dataPoints: datapoints,
-        toolTipContent: "{name} - {x}: {y}"
-      }
-    )
+  for (const [name, values] of Object.entries(names)) {
+    const datapoints = values.map(value => ({ y: value[1], x: value[0] }))
+    data.push({
+      type: "line",
+      name: name,
+      indexLabelFontSize: 16,
+      showInLegend: true,
+      xValueType: "number",
+      xValueFormatString: "####",
+      dataPoints: datapoints,
+      toolTipContent: "{name} - {x}: {y}"
+    })
   }
   console.log(data)
   var chart = new CanvasJS.Chart("chartContainer", {
@@ -30,54 +28,53 @@ window.onload = async function () {
     title: {
       text: "Historical name stats"
     },
-    legend:{
+    legend: {
       cursor: "pointer",
       verticalAlign: "center",
       horizontalAlign: "right",
       itemclick: toogleDataSeries
     },
-    axisX:{
-        interval: 1,
-        valueFormatString: "####",
-     },
+    axisX: {
+      interval: 1,
+      valueFormatString: "####",
+    },
     data: data
   });
 chart.render();
 
-function toogleDataSeries(e){
+  function toogleDataSeries(e) {
     console.log('here')
-	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-		e.dataSeries.visible = false;
-	} else{
-		e.dataSeries.visible = true;
-	}
-	chart.render();
-}
-
-document.getElementById("only_eny").addEventListener("click",function(){
-  chart.options.data.forEach(function(dataSeries){
-    if(dataSeries.name != 'ENY') {
-      dataSeries.visible = false
+    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+      e.dataSeries.visible = false;
+    } else {
+      e.dataSeries.visible = true;
     }
-  })
+    chart.render();
+  }
+
+  document.getElementById("only_eny").addEventListener("click", function() {
+    chart.options.data.forEach(function(dataSeries) {
+      if(dataSeries.name != 'ENY') {
+        dataSeries.visible = false
+      }
+    })
     chart.render()
 });
 
-document.getElementById("all").addEventListener("click",function(){
-  chart.options.data.forEach(function(dataSeries){
-    dataSeries.visible = true
-  })
+  document.getElementById("all").addEventListener("click", function() {
+    chart.options.data.forEach(function(dataSeries) {
+      dataSeries.visible = true
+    })
     chart.render()
-});
-
+  });
 }
 </script>
 </head>
 <body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-<input type="button" onclick="window.open('load_stats')" value="Load Stats"/>
-<button id="only_eny">Only Eny</button>
-<button id="all">All</button>
+  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+  <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+  <input type="button" onclick="window.open('load_stats')" value="Load Stats"/>
+  <button id="only_eny">Only Eny</button>
+  <button id="all">All</button>
 </body>
 </html>
