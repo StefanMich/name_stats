@@ -1,0 +1,6 @@
+For loading new stats:
+
+```
+docker exec -it name-stats ./load_stats.py
+```
+

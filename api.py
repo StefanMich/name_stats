@@ -41,13 +41,5 @@ def graph_view():
     return render_template('name.html')
 
 
-@app.route('/load_stats/', methods=['GET', 'POST'])
-def load_stats():
-    if request.method == 'POST':
-        store_all_stats()
-        return redirect('/')
-    return render_template('load_stats.html')
-
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
