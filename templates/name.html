@@ -43,7 +43,6 @@ window.onload = async function() {
 chart.render();
 
   function toogleDataSeries(e) {
-    console.log('here')
     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
       e.dataSeries.visible = false;
     } else {
@@ -67,6 +66,13 @@ chart.render();
     })
     chart.render()
   });
+
+  document.getElementById("none").addEventListener("click", function(event) {
+    chart.options.data.forEach(function(dataSeries) {
+      dataSeries.visible = false
+    })
+    chart.render()
+  });
 }
 </script>
 </head>
@@ -75,5 +81,6 @@ chart.render();
   <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
   <button id="only_eny">Only Eny</button>
   <button id="all">All</button>
+  <button id="none">None</button>
 </body>
 </html>
