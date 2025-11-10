@@ -24,4 +24,4 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: stefanmich/name-stats:latest, stefanmich/name-stats:${{ github.sha }}
+          tags: stefanmich/name-stats:latest, stefanmich/name-stats:${{ github.run_number }}
