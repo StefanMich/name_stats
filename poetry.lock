@@ -200,23 +200,22 @@ Flask = ">=0.9"
 
 [[package]]
 name = "gunicorn"
-version = "21.2.0"
+version = "26.2.0"
 description = "WSGI HTTP Server for UNIX"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.10"
 files = [
-    {file = "gunicorn-21.2.0-py3-none-any.whl", hash = "sha256:3213aa5e8c24949e792bcacfc176fef362e7aac80b76c56f6b5122bf350722f0"},
-    {file = "gunicorn-21.2.0.tar.gz", hash = "sha256:88ec8bff1d634f98e61b9f65bc4bf3cd918a90806c6f5c48bc5603849ec81033"},
+    {file = "gunicorn-26.2.0-py3-none-any.whl", hash = "sha256:bd249d0b3f7972f7432f0a6b6ff3b3ee2d129f70cd1ff6c09a9dd9e29a2b88e3"},
+    {file = "gunicorn-26.2.0.tar.gz", hash = "sha256:62b864895d9ebff0b2f9867ba04fe811c93121596540830c9c916d0769668447"},
 ]
 
-[package.dependencies]
-packaging = "*"
-
 [package.extras]
-eventlet = ["eventlet (>=0.24.1)"]
-gevent = ["gevent (>=1.4.0)"]
+fast = ["gunicorn_h1c (>=0.6.9)"]
+gevent = ["gevent (>=24.10.1)", "packaging"]
+http2 = ["h2 (>=4.4.1)"]
 setproctitle = ["setproctitle"]
-tornado = ["tornado (>=0.2)"]
+testing = ["coverage", "gevent (>=24.10.1)", "h2 (>=4.4.1)", "httpx[http2] (>=0.23.0)", "inotify (>=0.2.10)", "packaging", "pytest (>=9.0.3)", "pytest-asyncio", "pytest-cov", "uvloop (>=0.19.0)"]
+tornado = ["tornado (>=6.5.7)"]
 
 [[package]]
 name = "idna"
@@ -384,17 +383,6 @@ files = [
 ]
 
 [[package]]
-name = "packaging"
-version = "23.1"
-description = "Core utilities for Python packages"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "packaging-23.1-py3-none-any.whl", hash = "sha256:994793af429502c4ea2ebf6bf664629d07c1a9fe974af92966e4b8d2df7edc61"},
-    {file = "packaging-23.1.tar.gz", hash = "sha256:a392980d2b6cffa644431898be54b0045151319d1e7ec34f0cfed48767dd334f"},
-]
-
-[[package]]
 name = "requests"
 version = "2.31.0"
 description = "Python HTTP for Humans."
@@ -527,4 +515,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "ce129c26bea1e0e4d3caa262f8f32fefd6bf2cf5338d3dea46460bfcfb4a9aa1"
+content-hash = "7a352efc42195f877b581ab226ffe03724d01650e8b52aadc6eff48a72f0a18d"
