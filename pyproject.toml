@@ -18,7 +18,7 @@ gunicorn = ">=21.2,<27.0"
 mypy = "^1.8.0"
 types-requests = "^2.31.0.20240106"
 types-beautifulsoup4 = "^4.12.0.20240106"
-types-flask-cors = "^4.0.0.20240106"
+types-flask-cors = ">=4.0.0.20240106,<7.0.0.0"
 
 [build-system]
 requires = ["poetry-core"]
