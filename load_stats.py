@@ -9,12 +9,15 @@ from bs4 import BeautifulSoup
 
 from app import app
 
-url = 'https://www.dst.dk/da/DstDk-Global/Udvikler/HostHvorMangeHedder?ajax=1'
+url = 'https://www.dst.dk/da/DstDk-Global/Webredaktion/Navne/HostHvorMangeHedder?ajax=1'
+search_id = '{1312E947-E0D1-4859-9112-ED90EEB4BBDC}'
 
 
 def fetch_stats(name: str) -> Iterable[tuple[str, int, int]]:
     name_count = requests.get(
-        url, params={'firstName': name, }, headers={'Accept': 'application/json'})
+        url,
+        params={'firstName': name, 'lang': 'da', 'id': search_id},
+        headers={'Accept': 'application/json'})
     response_text = name_count.text
     soup = BeautifulSoup(response_text, 'html.parser')
 
@@ -24,7 +27,7 @@ def fetch_stats(name: str) -> Iterable[tuple[str, int, int]]:
     name_rows = len(rows) - 1
 
 
-    year_cell = header.find_all('th')[1]
+    year_cell = header.find('th')
     year = int(year_cell.text.replace('.', ''))
 
     total_count = 0
