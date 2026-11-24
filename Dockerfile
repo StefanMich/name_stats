@@ -1,5 +1,7 @@
 FROM python:3.12
 
+LABEL org.opencontainers.image.source="https://github.com/StefanMich/name_stats"
+
 ARG YOUR_ENV
 
 ENV YOUR_ENV=${YOUR_ENV} \

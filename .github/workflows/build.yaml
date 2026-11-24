@@ -5,10 +5,22 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Resolve release version
+        id: version
+        uses: StefanMich/github-actions/resolve-version@v1
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
 
@@ -26,4 +38,14 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: stefanmich/name-stats:latest, stefanmich/name-stats:${{ github.run_number }}
+          tags: stefanmich/name-stats:latest, stefanmich/name-stats:${{ steps.version.outputs.version }}
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VERSION: ${{ steps.version.outputs.version }}
+          NOTES: ${{ steps.version.outputs.notes }}
+        run: >
+          gh release create "v$VERSION" --target "$GITHUB_SHA"
+          --title "$NOTES" --notes "$NOTES"
