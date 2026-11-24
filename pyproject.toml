@@ -6,7 +6,7 @@ authors = ["Stefan Micheelsen <kontakt@stefanmicheelsen.dk>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.13"
 bs4 = ">=0.0.1,<0.0.3"
 requests = "^2.31.0"
 flask = ">=2.3.2,<4.0.0"
